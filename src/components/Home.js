@@ -1,16 +1,18 @@
 import React from "react";
 import { FaSistrix } from "react-icons/fa";
+
+
 const Home = (props) => {
   const [state, setState] = React.useState("");
   const [rlimit, setrlimit] = React.useState(10);
   const [model, setmodel] = React.useState("mpnet");
   const option = [
     {
-      label : "pre-trained model 1",
+      label : "Pre-trained Model 1",
       value : "mpnet"
     },
     {
-      label : "pre-trained model 2",
+      label : "Pre-trained Model 2",
       value : "minilm"
     },
   ];
@@ -42,12 +44,10 @@ const Home = (props) => {
 
   const onChangeModel = (e) => {
     const model = e.target.value;
-    console.log(model);
     setmodel(model);
   };
   const onChangeResultLimit = (e) => {
     const rlimit = e.target.value;
-    console.log(rlimit);
     setrlimit(rlimit);
   }
   return (
@@ -64,8 +64,9 @@ const Home = (props) => {
             value={state}
             required
           />
-          <label className="" htmlFor="Model">Model</label>
+          <label className="home_Label" htmlFor="Model">Select Model: </label>
             <select
+              className="home_dropdown"
               value={model}
               onChange = {onChangeModel} 
             >
@@ -73,9 +74,11 @@ const Home = (props) => {
                 <option value={option.value}>{option.label}</option>
               ))}
             </select>
+
           
-          <label className="" htmlFor="ResultsLimit">No. of Results</label>
+          <label className="home_Label" htmlFor="ResultsLimit">No. of Results: </label>
             <select
+              className="home_dropdown"
               value={rlimit}
               onChange = {onChangeResultLimit} 
             >

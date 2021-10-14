@@ -20,11 +20,38 @@ body {
   margin: 0 auto;
 }
 .home__logo {
+  margin-top: -40%;
   margin-bottom: 20px;
   text-align: center;
 }
 .home__form {
   position: relative;
+}
+.home_dropdown{
+  position: relative;
+  padding: 3px;
+  margin-top: 20px;
+  font-size: medium;
+
+}
+.home_Label{
+  
+  margin-left: 14%;
+  margin-right: 3px;
+  font-size: large;
+}
+.home_dropdown_sub{
+  position: relative;
+  padding: 3px;
+  margin-top: 15px;
+  font-size: medium;
+
+}
+.home_Label_sub{
+  margin-left: 10%;
+  margin-right: 5px;
+  font-size: large;
+
 }
 .search__icon {
   position: absolute;
@@ -92,9 +119,8 @@ body {
 }
 .show__details {
   margin-top: 25px;
-}
-.show__link {
-  margin-bottom: 5px;
+  border-bottom: 1px solid #e2dddd;
+  padding-bottom: 20px;
 }
 .show__link a {
   color: #3c4043;
@@ -104,8 +130,8 @@ body {
   margin-bottom: 10px;
 }
 .show__title a {
-  font-size: 20px;
-  color: #1a0dab;
+  font-size: 25px;
+  color: #000000;
   text-decoration: none;
 }
 .show__description {

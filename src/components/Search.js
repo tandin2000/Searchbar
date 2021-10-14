@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FaSistrix } from "react-icons/fa";
 import Show from "./Show";
 import Service from "./service";
@@ -18,14 +18,14 @@ const Search = (props) => {
     props.location.model ? props.location.model : "mpnet"
   );
   const [results, setResults] = React.useState([]);
-  const [info, setInfo] = React.useState("");
+  const [info, setInfo] = React.useState();
   const option = [
     {
-      label : "pre-trained model 1",
+      label : "Pre-trained Model 1",
       value : "mpnet"
     },
     {
-      label : "pre-trained model 2",
+      label : "Pre-trained Model 2",
       value : "minilm"
     },
   ];
@@ -54,41 +54,36 @@ const Search = (props) => {
 
   const onChangeModel = (e) => {
     const model = e.target.value;
-    console.log(model);
     setmodel(model);
-    searchGoogle(e);
+    search(e);
   };
   const onChangeResultLimit = (e) => {
     const rlimit = e.target.value;
-    console.log(rlimit);
     setrlimit(rlimit);
-    searchGoogle(e);
-
+    search(e);
   }
-  const searchGoogle = async (e) => {
+      
+  const search = async (e) => {
     e.preventDefault();
     try{
     const response = await Service.search(state,rlimit,model);
-    console.log(response);
     if (response) {
           setResults(response.data.results);
-          setInfo(response.data);
+          setInfo(rlimit);
         }
     }catch (error) {
       console.log(error);
     }
-    
   };
-  React.useEffect(() => {
+
+  useEffect(() => {
     async function getPosts() {
       if (props.location.state) {
         try {
           const response = await Service.search(state,rlimit,model);
-          console.log(response);
-
           if (response) {
             setResults(response.data.results);
-            setInfo(response.data);
+            setInfo(rlimit);
           }
         } catch (error) {
           console.log(error);
@@ -96,7 +91,8 @@ const Search = (props) => {
       }
     }
     getPosts();
-  }, []);
+  }, [state, rlimit,model]);
+
   return (
     <div className="search">
       <div className="search__form">
@@ -104,7 +100,7 @@ const Search = (props) => {
           <img src="/images/HeHealth_H.png" alt="logo" onClick={goBack}  height="50%" width="60%"  />
         </div>
         <div className="search__form-input">
-          <form className="home__form" onSubmit={searchGoogle}>
+          <form className="home__form" onSubmit={search}>
             <input
               type="text"
               className="home__input"
@@ -115,8 +111,9 @@ const Search = (props) => {
 
             <FaSistrix className="search__icon" />
 
-            <label className="" htmlFor="Model">Model</label>
+            <label className="home_Label_sub" htmlFor="Model">Select Model: </label>
             <select
+              className="home_dropdown_sub"
               value={model}
               onChange = {onChangeModel} 
             >
@@ -124,9 +121,11 @@ const Search = (props) => {
                 <option value={option.value}>{option.label}</option>
               ))}
             </select>
+
           
-          <label className="" htmlFor="ResultsLimit">No. of Results</label>
-          <select
+          <label className="home_Label_sub" htmlFor="ResultsLimit">No. of Results: </label>
+            <select
+              className="home_dropdown_sub"
               value={rlimit}
               onChange = {onChangeResultLimit} 
             >
